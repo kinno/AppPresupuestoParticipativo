@@ -1,0 +1,49 @@
+/* Estilos Propios */
+
+header.navbar{
+    font-size: 16px;
+    color: #485700;
+    margin-bottom: 0px;
+  }
+  
+  .navbar-custom{
+    background-color: #f8f8f8;
+      border-color: #e7e7e7;
+      border-radius: 4px;
+  }
+  
+  .logo-header{
+    width: 100%
+  }
+
+  .header-text{
+    padding-top: 9px;
+  }
+
+  .header-text>h1{
+    font-size: 30px;
+    line-height: 41px;
+    color: #5A6523;
+  }
+
+  .encabezado-text{
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .linea {
+    border-bottom: 5px solid #879E0F;
+    /* height: 2px;
+    max-width: 200px;
+    padding: 0; */
+    /* margin: 20px auto 0 auto; */
+  }
+
+  .leyenda{
+      font-size: 22px;
+  }
+
+  .header-container{
+    background-color: #F8F8F8;
+    border: 1px solid #E7E7E7;
+  }
