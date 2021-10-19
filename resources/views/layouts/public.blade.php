@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -13,8 +14,9 @@
     <!-- Scripts -->
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -25,6 +27,7 @@
     {{--
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" /> --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @yield("styles")
 </head>
 
 <body>
@@ -37,7 +40,7 @@
                         <img src="{{ asset('images/logos/h1.png') }}" alt="" class="logo-header">
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 encabezado-text">
-                        <div id="nombresitio" class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
+                        <div id="nombresitio" class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                             <h1>Presupuesto Participativo</h1>
                             <h3>Secretaría de Finanzas</h3>
                         </div>
@@ -60,11 +63,13 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item " :active="request()->routeIs('municipio.index')">
-                                        <a class="nav-link" href="{{ route('municipio.index') }}">Conoce tu municipio
-                                            <span class="sr-only">(current)</span></a>
+                                    <li class="nav-item {{ (Route::currentRouteName() == 'home') ? 'active' : '' }}" >
+                                        <a class="nav-link " href="{{ route('home') }}">
+                                            <span class="bi-house-door-fill"></span>
+                                            Inicio
+                                        </a>
                                     </li>
-                                    <li class="nav-item ">
+                                    <li class="nav-item {{ (Route::currentRouteName() == 'municipio.index') ? 'active' : '' }}">
                                         <a class="nav-link" href="{{ route('municipio.index') }}">Conoce tu municipio
                                             <span class="sr-only">(current)</span></a>
                                     </li>
