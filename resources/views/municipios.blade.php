@@ -84,7 +84,9 @@ $(document).ready(function () {
                 fill: false,
             }).addTo(map);
         });
-
+        
+        //cargamos el layout de las regiones del estado
+        var objregiones = []; 
         proj4.defs('EPSG:3857');
         var geojsonr = $.getJSON('{{ asset('files/geojson/igecemregionalizacion2018a.json') }}',function(data){
             var layersregiones = L.Proj.geoJson(data,{
@@ -261,7 +263,7 @@ $(document).ready(function () {
             }).addTo(map);
         });
 
-        //cargamos el layout de las regiones del estado
+        
 
     
     // $.getJSON("https://gaia.inegi.org.mx/wscatgeo/geo/mgee/15", function(data){
