@@ -65,13 +65,11 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body" id="analisisRegionalContainer">
-              
+            <div class="modal-body container-fluid" id="analisisRegionalContainer">
             </div>
           </div>
         </div>
-      </div>
-      
+    </div>
 </div>
 @endsection
 
@@ -288,6 +286,10 @@ $(document).ready(function () {
                    layer.on({
                        click: zoomToFeature
                    })
+                   layer.bindTooltip("Región: <b>"+layer.feature.properties.num_reg+" "+layer.feature.properties.nom_reg+"</b><br><i>(Click para ver el <b>Análisis regional</b>)</i>",{
+                       direction: 'right',
+                       sticky: true
+                   }).openTooltip();
                 }
             });         
         });
@@ -298,7 +300,7 @@ $(document).ready(function () {
     }
     
     function showModalRegiones(e){
-        console.log("abre modal",e);
+        //console.log("abre modal",e);
         $("#nombreRegionModal").html(e.sourceTarget.feature.properties.num_reg+" "+e.sourceTarget.feature.properties.nom_reg);
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -328,7 +330,7 @@ $(document).ready(function () {
             layerMunicipio.addTo(map);
             
            layerMarker = L.marker(layerMunicipio.getBounds().getCenter())
-            .bindTooltip("<b>Municipio: </b><br>"+municipio.nom_municipio+".",{
+            .bindTooltip("Municipio: <b><br>"+municipio.nom_municipio+".",{
                     permanent:true,
                     direction:'auto',
                     className: 'countryLabel',
