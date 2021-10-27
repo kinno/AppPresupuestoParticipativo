@@ -27,7 +27,7 @@
                                 <option value="">Seleccione...</option>
                                 @foreach ($municipios as $key => $municipio)
                                 <option value="{{ $municipio }}" title="{{ $municipio->id }}">{{
-                                    $municipio->descripcion}}</option>
+                                    $municipio->nom_municipio}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -56,6 +56,22 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalAnalisis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="nombreRegionModal"></h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="analisisRegionalContainer">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
 </div>
 @endsection
 
@@ -69,11 +85,18 @@
     //
 $(document).ready(function () {
     var layerMunicipio = null;
-    var map = new L.Map("map", {center: [19.354167, -99.630833],zoom: 10,  zoomSnap: 2.93,zoomDelta:3 });
+    var layerMarker = null;
+    var layersregiones = null;
+    var analisisRegion = null;
+    
+    var map = new L.Map("map", {center: [19.354167, -99.630833],zoom: 9,zoomDelta:1 });
+    map.createPane('labels');
+    map.getPane('labels').style.zIndex = 650;
   
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href=”http://osm.org/copyright”>OpenStreetMap</a> contributors',
-        opacity: 1
+        opacity: 1,
+      
         }).addTo(map);
 
         //cargamos el layout de los límites del estado de méxico
@@ -89,260 +112,261 @@ $(document).ready(function () {
         var objregiones = []; 
         proj4.defs('EPSG:3857');
         var geojsonr = $.getJSON('{{ asset('files/geojson/igecemregionalizacion2018a.json') }}',function(data){
-            var layersregiones = L.Proj.geoJson(data,{
-                
-            });
+            layersregiones = L.Proj.geoJson(data,{
+                onEachFeature: function(feature,layer){
+                   
+                    //asigna estilo a las capas de las regiones
+                    switch (layer.feature.properties.num_reg) {
+                        case "I":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#238B23",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "II":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#FF5500",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "III":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#FFFFBE",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "IV":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#01FEC5",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "V":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#E23354",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "VI":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#E69800",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "VII":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#FE8180",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "VIII":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#c587f5",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "IX":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#AFB4B0",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "X":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#024CA2",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XI":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#A801E6",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XII":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#FFEABD",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XIII":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#F6B19A",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XIV":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#71E0FF",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XV":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#BEEAFE",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XVI":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#7CC701",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XVII":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#C5CE01",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XVIII":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#FDC0BC",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XIX":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#A2FF73",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                        case "XX":
+                                layer.setStyle({
+                                    color: "black",
+                                    fillColor: "#AD7200",
+                                    fillOpacity: 0.8,
+                                    weight: 0.5
+                                });
+                            break;
+                    
+                        default:
+                            break;
+                    }
 
-            layersregiones.eachLayer(function (layer){
-                console.log(layer.feature.properties.num_reg,layer.feature.properties.nom_reg);
-                switch (layer.feature.properties.num_reg) {
-                    case "I":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#238B23",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "II":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#FF5500",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "III":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#FFFFBE",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "IV":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#01FEC5",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "V":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#E23354",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "VI":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#E69800",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "VII":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#FE8180",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "VIII":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#c587f5",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "IX":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#AFB4B0",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "X":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#024CA2",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XI":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#A801E6",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XII":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#FFEABD",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XIII":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#F6B19A",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XIV":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#71E0FF",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XV":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#BEEAFE",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XVI":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#7CC701",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XVII":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#C5CE01",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XVIII":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#FDC0BC",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XIX":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#A2FF73",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                    case "XX":
-                            layer.setStyle({
-                                color: "black",
-                                fillColor: "#AD7200",
-                                fillOpacity: 0.8,
-                                weight: 0.5
-                            });
-                        break;
-                
-                    default:
-                        break;
+                    //agregamos propiedad para ocultar/mostrar
+                   feature.properties.active = false;
+
+                   layer.on({
+                       click: zoomToFeature
+                   })
                 }
-            }).addTo(map);
+            });         
         });
 
+    function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+        showModalRegiones(e);
+    }
+    
+    function showModalRegiones(e){
+        console.log("abre modal",e);
+        $("#nombreRegionModal").html(e.sourceTarget.feature.properties.num_reg+" "+e.sourceTarget.feature.properties.nom_reg);
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: "get",
+            url: "/widgets/analisisregional",
+            data:{analisisRegion},
+            dataType: 'html',
+            success: function (response) {
+                $("#analisisRegionalContainer").html(response);
+                $("#modalAnalisis").modal("show");
+            }
+        });
+    }
         
-
-    
-    // $.getJSON("https://gaia.inegi.org.mx/wscatgeo/geo/mgee/15", function(data){
-    //     L.geoJSON(data,{
-    //         color: 'green',
-    //         fillColor: '#77dd77',
-    //         fillOpacity: 0.2,
-    //         onEachFeature: function(f,l){
-    //         console.log(f)
-    //     }
-    //     }).addTo(map);
-    // });
-        
-
-    
-
-    
- 
-    // var geojsonlayer = new L.GeoJSON.AJAX('{{ asset('files/geojson/igecemregionalizacion2018a.geojson') }}',{
-    //     onEachFeature: function(f,l){
-    //         console.log(f);
-           
-    //     }
-    // }).addTo(map);
-
-    
-
-    // var searchboxControl=createSearchboxControl();
-    //     var control = new searchboxControl({
-    //         sidebarTitleText: 'Header',
-    //         sidebarMenuItems: {
-    //             Items: [
-    //                 { type: "link", name: "Link 1 (github.com)", href: "http://github.com", icon: "icon-local-carwash" },
-    //                 { type: "link", name: "Link 2 (google.com)", href: "http://google.com", icon: "icon-cloudy" },
-    //                 { type: "button", name: "Button 1", onclick: "alert('button 1 clicked !')", icon: "icon-potrait" },
-    //                 { type: "button", name: "Button 2", onclick: "button2_click();", icon: "icon-local-dining" },
-    //                 { type: "link", name: "Link 3 (stackoverflow.com)", href: 'http://stackoverflow.com', icon: "icon-bike" },
-    //             ]
-    //         }
-    //     });
-    //     control._searchfunctionCallBack = function (searchkeywords)
-    //     {
-    //         if (!searchkeywords) {
-    //             searchkeywords = "The search call back is clicked !!"
-    //         }
-    //         alert(searchkeywords);
-    //     }
-    //     map.addControl(control);
-
-
-    // function button2_click()
-    // {
-    //     alert('button 2 clicked !!!');
-    // }
-
     function getDataMunicipio(municipio){
         (layerMunicipio==null) ? "" : map.removeLayer(layerMunicipio);
-        $.getJSON("https://gaia.inegi.org.mx/wscatgeo/geo/mgem/buscar/"+municipio.descripcion, function(data){
-            // // console.log(data)
-        layerMunicipio =  L.geoJSON(data,{
-            color: 'red',
-            fillColor: '#f95454',
-            fillOpacity: 0.5,
-        }).bindTooltip(municipio.descripcion+" (" +municipio.region+" ).");
-        layerMunicipio.addTo(map);
+        (layerMarker==null) ? "" : map.removeLayer(layerMarker);
+        $.getJSON("https://gaia.inegi.org.mx/wscatgeo/geo/mgem/buscar/"+municipio.nom_municipio, function(data){
+            //console.log(data)
+            layerMunicipio =  L.geoJSON(data,{
+                dashArray: "5 5",
+                weight: 1,
+                color: 'black',
+                fillColor: 'white',
+                fillOpacity: 0.3,
+                });
+            layerMunicipio.addTo(map);
+            
+           layerMarker = L.marker(layerMunicipio.getBounds().getCenter())
+            .bindTooltip("<b>Municipio: </b><br>"+municipio.nom_municipio+".",{
+                    permanent:true,
+                    direction:'auto',
+                    className: 'countryLabel',
+                    opacity: 0.9
+                }).openTooltip();
+            layerMarker.addTo(map);
+            });
+            
+    }
 
-        console.log();
-    });
+    function buscaRegion(region){
+       layersregiones.eachLayer(function(layer){
+          // console.log(layer.feature.properties.active,layer.feature.properties.nom_reg.toUpperCase(),region)
+           if(layer.feature.properties.active == true){
+            layer.feature.properties.active = false;
+                map.removeLayer(layer);
+           }
+           if(layer.feature.properties.nom_reg.toUpperCase() == region){
+                layer.feature.properties.active = true;
+                map.fitBounds(layer.getBounds()).addLayer(layer);
+                
+           }
+       })
     }
 
     $("#municipios").select2().on('select2:select', function (e) {
         var data = e.params.data;
-            data = $.parseJSON(data.id);
+        data = $.parseJSON(data.id);
+        analisisRegion = $.parseJSON(data.region.analisis);
+        // console.log($.parseJSON(data.region.analisis));
+        buscaRegion(data.region.nom_region);
         getDataMunicipio(data);
+       
 
         $(".dynamic").remove();
-        var datosregionhtml = "<li class='list-group-item dynamic'>Region: "+data.region+"</li><li class='list-group-item dynamic'>Otros datos:</li>";
+        var datosregionhtml = "<li class='list-group-item dynamic'>Region: "+data.region.cve_region+" "+data.region.nom_region+"</li><li class='list-group-item dynamic'>Otros datos:</li>";
         $("#datosRegion").append(datosregionhtml);
-        var url = '{{ asset('files/igecem/') }}/'+data.descripcion+'.pdf';
+        var url = '{{ asset('files/igecem/') }}/'+data.nom_municipio+'.pdf';
         $("#archivoMunicipio").attr("href", url);
         $("#descripcionMunicipio").show();
     });

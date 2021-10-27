@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Controllers\CatMunicipioController;
+use App\Http\Controllers\WidgetsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,7 @@ Route::get('/', function () {
 
 // Route::get('/conoce_tu_municipio',CatMunicipioController::class,'index');
 Route::get('/conoce', [CatMunicipioController::class,"index"])->name("municipio.index");
+Route::get('/widgets/analisisregional', [WidgetsController::class, 'showAnalisis']);
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
