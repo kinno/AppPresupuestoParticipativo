@@ -14,7 +14,7 @@ class AddAnalisisOnCatRegionesTable extends Migration
     public function up()
     {
         Schema::table('cat_regiones', function (Blueprint $table) {
-            $table->json('analisis')->after('cve_region');
+            $table->json('analisis')->nullable()->after('cve_region');
 
         });
     }

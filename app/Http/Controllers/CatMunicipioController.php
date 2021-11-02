@@ -20,13 +20,4 @@ class CatMunicipioController extends Controller
         $municipios->load('region');
         return view("municipios",compact('municipios'));
     }
-
-    public function conoce2(){
-        // $municipios = CatMunicipio::pluck('descripcion','id', 'region')->prepend('Seleccionar...')->toArray();
-        $municipios = CatMunicipio::all();
-        $municipios->load('region');
-        return view("municipios_vue",compact('municipios'));
-    }
-
-
 }

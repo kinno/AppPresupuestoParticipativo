@@ -27,6 +27,7 @@
     {{--
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" /> --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('css/select2-bootstrap4.css') }}" rel="stylesheet" />
     @yield("styles")
 </head>
 
@@ -73,8 +74,9 @@
                                         <a class="nav-link" href="{{ route('municipio.index') }}">Conoce tu municipio
                                             <span class="sr-only">(current)</span></a>
                                     </li>
-                                   <li class="nav-item">
-                                        <a class="nav-link" href="#">Registro</a>
+                                    <li class="nav-item {{ (Route::currentRouteName() == 'registro.index') ? 'active' : '' }}">
+                                        <a class="nav-link" href="{{ route('registro.index') }}">Registra tu proyecto
+                                            <span class="sr-only">(current)</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -87,8 +89,10 @@
         <!-- Main content -->
         <main role="main">
             <div class="container-fluid">
-                <div class="row ">
-                    @yield('content')
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 offset-xl-1">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </main>

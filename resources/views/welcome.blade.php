@@ -6,6 +6,7 @@
     <div class="row">
         <div class="col-12">
             <h1>Bienvenido</h1>
+            {{-- {{ phpinfo() }} --}}
         </div>
     </div>
     

@@ -301,7 +301,7 @@ $(document).ready(function () {
     
     function showModalRegiones(e){
         //console.log("abre modal",e);
-        $("#nombreRegionModal").html(e.sourceTarget.feature.properties.num_reg+" "+e.sourceTarget.feature.properties.nom_reg);
+        $("#nombreRegionModal").html("Región: "+e.sourceTarget.feature.properties.num_reg+" "+e.sourceTarget.feature.properties.nom_reg);
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             type: "get",
@@ -366,7 +366,7 @@ $(document).ready(function () {
        
 
         $(".dynamic").remove();
-        var datosregionhtml = "<li class='list-group-item dynamic'>Region: "+data.region.cve_region+" "+data.region.nom_region+"</li><li class='list-group-item dynamic'>Otros datos:</li>";
+        var datosregionhtml = "<li class='list-group-item dynamic'>Region: "+data.region.cve_region+" "+data.region.nom_region+"</li>";
         $("#datosRegion").append(datosregionhtml);
         var url = '{{ asset('files/igecem/') }}/'+data.nom_municipio+'.pdf';
         $("#archivoMunicipio").attr("href", url);
