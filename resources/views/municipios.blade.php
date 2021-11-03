@@ -82,9 +82,10 @@
 <script type="text/javascript">
     //
 $(document).ready(function () {
-    var layerMunicipio = null;
+    // var layerMunicipio = null;
     var layerMarker = null;
     var layersregiones = null;
+    var layersmunicipios = null;
     var analisisRegion = null;
     
     var map = new L.Map("map", {center: [19.354167, -99.630833],zoom: 9,zoomDelta:1 });
@@ -294,6 +295,16 @@ $(document).ready(function () {
             });         
         });
 
+        //cargamos los municipios del estado 
+        var objmunicipíos = [];
+        proj4.defs('EPSG:3857');
+        var geojsonl = $.getJSON('{{ asset('files/geojson/igecemdivpolmunm2018cg.json') }}',function(data){
+            L.Proj.geoJson(data,{
+                color: 'black',
+                fill: false,
+            }).addTo(map);
+        });
+
     function zoomToFeature(e) {
         map.fitBounds(e.target.getBounds());
         showModalRegiones(e);
@@ -315,33 +326,49 @@ $(document).ready(function () {
         });
     }
         
-    function getDataMunicipio(municipio){
-        (layerMunicipio==null) ? "" : map.removeLayer(layerMunicipio);
-        (layerMarker==null) ? "" : map.removeLayer(layerMarker);
-        $.getJSON("https://gaia.inegi.org.mx/wscatgeo/geo/mgem/buscar/"+municipio.nom_municipio, function(data){
-            //console.log(data)
-            layerMunicipio =  L.geoJSON(data,{
-                dashArray: "5 5",
-                weight: 1,
-                color: 'black',
-                fillColor: 'white',
-                fillOpacity: 0.3,
-                });
-            layerMunicipio.addTo(map);
+    // function getDataMunicipio(municipio){
+    //     (layerMunicipio==null) ? "" : map.removeLayer(layerMunicipio);
+    //     (layerMarker==null) ? "" : map.removeLayer(layerMarker);
+    //     console.log(municipio.nom_municipio);
+    //     $.getJSON("https://gaia.inegi.org.mx/wscatgeo/geo/mgem/buscar/"+municipio.nom_municipio, function(data){
+    //         //console.log(data)
+    //         layerMunicipio =  L.geoJSON(data,{
+    //             dashArray: "5 5",
+    //             weight: 1,
+    //             color: 'black',
+    //             fillColor: 'white',
+    //             fillOpacity: 0.3,
+    //             });
+    //         layerMunicipio.addTo(map);
             
-           layerMarker = L.marker(layerMunicipio.getBounds().getCenter())
-            .bindTooltip("Municipio: <b><br>"+municipio.nom_municipio+".",{
-                    permanent:true,
-                    direction:'auto',
-                    className: 'countryLabel',
-                    opacity: 0.9
-                }).openTooltip();
-            layerMarker.addTo(map);
-            });
+    //        layerMarker = L.marker(layerMunicipio.getBounds().getCenter())
+    //         .bindTooltip("Municipio: <b><br>"+municipio.nom_municipio+".",{
+    //                 permanent:true,
+    //                 direction:'auto',
+    //                 className: 'countryLabel',
+    //                 opacity: 0.9
+    //             }).openTooltip();
+    //         layerMarker.addTo(map);
+    //         });
             
-    }
+    // }
 
     function buscaRegion(region){
+       layersregiones.eachLayer(function(layer){
+          // console.log(layer.feature.properties.active,layer.feature.properties.nom_reg.toUpperCase(),region)
+           if(layer.feature.properties.active == true){
+            layer.feature.properties.active = false;
+                map.removeLayer(layer);
+           }
+           if(layer.feature.properties.nom_reg.toUpperCase() == region){
+                layer.feature.properties.active = true;
+                map.fitBounds(layer.getBounds()).addLayer(layer);
+                
+           }
+       })
+    }
+
+    function buscaMunicipio(municipio){
        layersregiones.eachLayer(function(layer){
           // console.log(layer.feature.properties.active,layer.feature.properties.nom_reg.toUpperCase(),region)
            if(layer.feature.properties.active == true){
