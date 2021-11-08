@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid mt-4">
     <div class="row">
         <div class="col-12">
             <h1>Conoce tu municipio</h1>
@@ -58,24 +58,22 @@
     </div>
     <div class="modal fade" id="modalAnalisis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title" id="nombreRegionModal"></h3>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="nombreRegionModal"></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body container-fluid" id="analisisRegionalContainer">
+                </div>
             </div>
-            <div class="modal-body container-fluid" id="analisisRegionalContainer">
-            </div>
-          </div>
         </div>
     </div>
 </div>
 @endsection
 
 @section("scripts")
-{{-- <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script> --}}
-{{-- <script src="{{ asset('js/leaflet.customsearchbox.js') }}"></script> --}}
 <script src="{{ asset('js/leaflet.ajax.min.js') }}"></script>
 <script src="{{ asset('js/proj4.js') }}"></script>
 <script src="{{ asset('js/proj4leaflet.js') }}"></script>
@@ -299,10 +297,13 @@ $(document).ready(function () {
         var objmunicipíos = [];
         proj4.defs('EPSG:3857');
         var geojsonl = $.getJSON('{{ asset('files/geojson/igecemdivpolmunm2018cg.json') }}',function(data){
-            L.Proj.geoJson(data,{
+        layersmunicipios = L.Proj.geoJson(data,{
+                dashArray: "5 5",
+                weight: 1,
                 color: 'black',
-                fill: false,
-            }).addTo(map);
+                fillColor: 'white',
+                fillOpacity: 0.3,
+            });
         });
 
     function zoomToFeature(e) {
@@ -369,15 +370,26 @@ $(document).ready(function () {
     }
 
     function buscaMunicipio(municipio){
-       layersregiones.eachLayer(function(layer){
-          // console.log(layer.feature.properties.active,layer.feature.properties.nom_reg.toUpperCase(),region)
+        (layerMarker==null) ? "" : map.removeLayer(layerMarker);
+       layersmunicipios.eachLayer(function(layer){
+        //   console.log(layer.feature.properties.active,layer.feature.properties.nom_mun,municipio.nom_municipio)
            if(layer.feature.properties.active == true){
             layer.feature.properties.active = false;
                 map.removeLayer(layer);
            }
-           if(layer.feature.properties.nom_reg.toUpperCase() == region){
+           if(layer.feature.properties.nom_mun.toUpperCase() == municipio.nom_municipio){
                 layer.feature.properties.active = true;
                 map.fitBounds(layer.getBounds()).addLayer(layer);
+
+                layerMarker = L.marker(layer.getBounds().getCenter())
+                .bindTooltip("Municipio: <b><br>"+municipio.nom_municipio+".",{
+                        permanent:true,
+                        direction:'auto',
+                        className: 'countryLabel',
+                        opacity: 0.9
+                    }).openTooltip();
+                layerMarker.addTo(map);
+                
                 
            }
        })
@@ -389,7 +401,8 @@ $(document).ready(function () {
         analisisRegion = $.parseJSON(data.region.analisis);
         // console.log($.parseJSON(data.region.analisis));
         buscaRegion(data.region.nom_region);
-        getDataMunicipio(data);
+        buscaMunicipio(data);
+        // getDataMunicipio(data);
        
 
         $(".dynamic").remove();

@@ -6,6 +6,7 @@ use App\Http\Requests\RegistroFormRequest;
 use App\Http\Traits\CatalogosTrait;
 use App\Models\TblPostulantes;
 use App\Models\TblProyectosPP;
+use Illuminate\Support\Facades\Storage;
 
 class RegistroProyectosController extends Controller
 {
@@ -21,6 +22,9 @@ class RegistroProyectosController extends Controller
 
     public function send(RegistroFormRequest $request){
         // dd(json_encode($request->poblacion_beneficiada_esp));
+        $imagen = $request->file('img_predio')->store('public/imagenes/predios');
+        $url = Storage::url($imagen);
+
         $proyecto = new TblProyectosPP;
         $proyecto->nombre_proyecto = $request->nombre_proyecto;
         $proyecto->id_tipo_proyecto = $request->id_tipo_proyecto;
@@ -28,7 +32,7 @@ class RegistroProyectosController extends Controller
         $proyecto->componentes = $request->componentes;
         $proyecto->latlng = $request->latlng;
         $proyecto->domicilio = $request->domicilio;
-        $proyecto->img_predio = $request->img_predio;
+        $proyecto->img_predio = $url;
         $proyecto->costo = $request->costo;
         $proyecto->poblacion_beneficiada = $request->poblacion_beneficiada;
         $proyecto->poblacion_beneficiada_esp = json_encode($request->poblacion_beneficiada_esp);

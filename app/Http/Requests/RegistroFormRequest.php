@@ -37,7 +37,7 @@ class RegistroFormRequest extends FormRequest
             "componentes" => "required|max:500",
             "domicilio" => "required",
             "latlng" => "required",
-            "img_predio" => "required|image",
+            "img_predio" => "required|image|max:2048",
             "costo" => "required|numeric",
             "poblacion_beneficiada" => "required",
             "tiempo_ejecucion" => "required",

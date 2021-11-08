@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid mt-4">
-    <form action="{{ route('registro.send') }}" method="post" id="formRegistro">
+    <form action="{{ route('registro.send') }}" method="post" id="formRegistro" enctype="multipart/form-data">
         @csrf
         <div id="accordion">
             <div class="card">
@@ -233,10 +233,10 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-12">
-                                        <x-form-input type="file" name="img_predio" label="Imagen del predio:">
+                                        <x-form-input type="file" name="img_predio" label="Imagen del predio:" accept="image/*">
                                             @slot('help')
                                             <small class="form-text text-muted">
-                                                (Imagen del predio donse se realizará el proyecto)
+                                                (Imagen del predio donse se realizará el proyecto) Nota: el archivo de imagen no debe pesar más de 2 MB
                                             </small>
                                             @endslot
                                         </x-form-input>
