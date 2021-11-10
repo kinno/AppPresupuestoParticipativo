@@ -17,6 +17,8 @@ class AddForeignKeyTblProyectosPpTable extends Migration
         Schema::table('tbl_proyectos_pp',function(Blueprint $table){
             $table->bigInteger('id_tipo_proyecto')->unsigned()->after('nombre_proyecto');
             $table->foreign('id_tipo_proyecto')->references('id')->on('cat_tipo_proyecto');
+            $table->bigInteger('id_municipio')->unsigned()->after('nombre_proyecto');
+            $table->foreign('id_municipio')->references('id')->on('cat_municipios');
         });
     }
 
@@ -30,6 +32,7 @@ class AddForeignKeyTblProyectosPpTable extends Migration
         //
         Schema::table('tbl_proyectos_pp',function(Blueprint $table){
             $table->dropForeign('tbl_proyectos_pp_id_tipo_proyecto_foreign');
+            $table->dropForeign('tbl_proyectos_id_municipio_foreign');
         });
     }
 }

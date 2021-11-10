@@ -1,7 +1,31 @@
 $(function () {
-    // $('#formRegistro').on('submit', function (event) {
-    //     event.preventDefault();
-    // });
+    if($(".is-invalid").toArray().length>0){
+        $(".dynamic-container").each(function(index){
+            $(this).toggle();
+        })
+    } 
+    
+    $("#verifyCURP").click(function (e) { 
+        $.ajax({
+            type: "post",
+            url: "/registra_tu_proyecto/buscarCURP",
+            data: {'curp':$("#curpinput").val()},
+            dataType: "json",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            success: function (response) {
+                console.log(response)
+                if(response.encontrado){
+                    window.location.assign('/registra_tu_proyecto/resultado?id=' + response.id_proyecto_pp);
+                }else{
+                    $(".dynamic-container").each(function(index){
+                            $(this).fadeToggle("slow");
+                        })
+                    $("#auto_id_curp").val($("#curpinput").val());    
+                }
+            }
+        });
+        // 
+    });
 
     $("#auto_id_id_municipio").on('change', function () {
         $("#auto_id_region").val($("#auto_id_id_municipio option:selected").attr('region'))
@@ -65,5 +89,6 @@ $(function () {
         map.invalidateSize(true);
     })
 
+    
 
 });

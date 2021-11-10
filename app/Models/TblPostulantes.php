@@ -9,4 +9,8 @@ class TblPostulantes extends Model
 {
     use HasFactory;
     protected $table = "tbl_postulantes";
+    
+    public function proyectoPP(){
+        return $this->hasOne('App\Models\TblProyectosPP','id','id_proyecto_pp');
+    }
 }

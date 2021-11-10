@@ -16,8 +16,8 @@ class CreateTblProyectosPpTable extends Migration
         Schema::create('tbl_proyectos_pp', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_proyecto');
-            $table->string('impacto');
-            $table->string('componentes');
+            $table->string('impacto',500);
+            $table->string('componentes',500);
             $table->string('img_croquis')->nullable();
             $table->string('img_predio');
             $table->string('domicilio');

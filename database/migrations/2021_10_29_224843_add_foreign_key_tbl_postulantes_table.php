@@ -15,8 +15,6 @@ class AddForeignKeyTblPostulantesTable extends Migration
     {
         //
         Schema::table('tbl_postulantes',function(Blueprint $table){
-            $table->bigInteger('id_municipio')->unsigned()->after('domicilio');
-            $table->foreign('id_municipio')->references('id')->on('cat_municipios');
             $table->bigInteger('id_proyecto_pp')->unsigned()->after('reside_municipio');
             $table->foreign('id_proyecto_pp')->references('id')->on('tbl_proyectos_pp');
         });
@@ -31,7 +29,7 @@ class AddForeignKeyTblPostulantesTable extends Migration
     {
         //
         Schema::table('tbl_postulantes',function(Blueprint $table){
-            $table->dropForeign('tbl_postulantes_id_municipio_foreign');
+           
             $table->dropForeign('tbl_postulantes_id_proyecto_pp_foreign');
         });
     }

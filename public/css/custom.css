@@ -54,3 +54,7 @@ header.navbar{
     background-color: #F8F8F8;
     border: 1px solid #E7E7E7;
   }
+
+  .bold{
+    font-weight: bold;
+  }
