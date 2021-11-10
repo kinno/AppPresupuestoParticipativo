@@ -80,4 +80,7 @@
   'roboto' => array(
     '500' => $fontDir . '/roboto_500_5f9df759bbe37a113d7d94b26335edef',
   ),
+  'nunito' => array(
+    'normal' => $fontDir . '/nunito_normal_7173294b894229c46ad1835001660d90',
+  ),
 ) ?>
