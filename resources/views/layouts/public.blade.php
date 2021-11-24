@@ -9,14 +9,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Sistema para el Presupuesto Participativo') }}</title>
 
     <!-- Scripts -->
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -78,6 +73,17 @@
                                         <a class="nav-link" href="{{ route('registro.index') }}">Registra tu proyecto
                                             <span class="sr-only">(current)</span></a>
                                     </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Comités Ciudadanos Regionales de Presupuesto Participativo
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                          <a class="dropdown-item {{ (Route::currentRouteName() == 'aspirantes.registro') ? 'active' : '' }}" href="{{ route('aspirantes.registro') }}">Registro de Aspirantes</a>
+                                          <a class="dropdown-item" href="#">Consulta de resultados</a>
+                                          <div class="dropdown-divider"></div>
+                                          <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                      </li>
                                 </ul>
                             </div>
                         </nav>

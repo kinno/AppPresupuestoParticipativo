@@ -16,9 +16,19 @@
                                     <span class="bi bi-person-square"></span>
                                 @endslot
                             </x-form-input>
+                            <div id="alert" class="alert alert-danger" role="alert" style="display:none">
+                                
+                            </div>
                         </div>
                     </div>
-                    <div class="form">
+                    <div class="form-row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+                            <div id="alert" class="alert alert-danger" role="alert" style="display:none">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-xs-12 col-sm-12 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
                             <button type="button" id="verifyCURP" class="btn-lg btn-block btn-success">
                                 <i class="bi-clipboard-check" ></i> Confirmar CURP
@@ -28,9 +38,15 @@
                     </div>
                 
                 </div>
-                {{-- <div class="card-footer text-muted">
-                    <span>Errores:</span>
-                </div> --}}
+                <div id="loader" class="card-footer text-muted" style="display:none">
+                    <div class="d-flex justify-content-center">
+                        <h3>Cargando...</h3>
+                        <div class="spinner-grow text-success" role="status">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                      </div>
+                </div>
+               
             </div>
         </div>
     </div>
@@ -337,6 +353,13 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div id="divLoader" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            ...
+          </div>
+        </div>
     </div>
 </div>
 @endsection

@@ -32,7 +32,7 @@ class AddForeignKeyTblProyectosPpTable extends Migration
         //
         Schema::table('tbl_proyectos_pp',function(Blueprint $table){
             $table->dropForeign('tbl_proyectos_pp_id_tipo_proyecto_foreign');
-            $table->dropForeign('tbl_proyectos_id_municipio_foreign');
+            $table->dropForeign('tbl_proyectos_pp_id_municipio_foreign');
         });
     }
 }

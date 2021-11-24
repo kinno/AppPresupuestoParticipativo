@@ -1,0 +1,26 @@
+{
+"request": {
+    "consulta": "CURP",
+    "data": {
+            "CURP": "SAVS931113HVZNCR03"
+            }
+    }
+}
+
+Desarrollo
+https://desabus.edomex.gob.mx/bussrv/sei/dkb_frRENAPO1.php/consulta
+
+Usuario: pparticipativo
+
+Contraseña: 9pAr7iciP@ti/o
+
+
+Producción
+
+https://bus.edomex.gob.mx/bussrv/sei/dkb_frRENAPO1.php/consulta
+
+Usuario: pparticipativo
+
+Contraseña: 9pAr7iciP@ti/o
+
+Auth Basic 

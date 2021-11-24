@@ -79,6 +79,7 @@
   ),
   'roboto' => array(
     '500' => $fontDir . '/roboto_500_5f9df759bbe37a113d7d94b26335edef',
+    'normal' => $fontDir . '/roboto_normal_ca48754af68cedb64cabcddb1ebb63e9',
   ),
   'nunito' => array(
     'normal' => $fontDir . '/nunito_normal_7173294b894229c46ad1835001660d90',

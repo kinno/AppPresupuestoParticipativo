@@ -315,7 +315,11 @@ $(document).ready(function () {
     }
     
     function showModalRegiones(e){
-        //console.log("abre modal",e);
+        //VERIFICAR TLALNEPANTLA DE BAZ
+
+
+
+
         $("#nombreRegionModal").html("Región: "+e.sourceTarget.feature.properties.num_reg+" "+e.sourceTarget.feature.properties.nom_reg);
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -382,8 +386,8 @@ $(document).ready(function () {
            }
            if(layer.feature.properties.nom_mun.toUpperCase() == municipio.nom_municipio){
                 layer.feature.properties.active = true;
-                map.fitBounds(layer.getBounds()).addLayer(layer);
-
+                // map.fitBounds(layer.getBounds()).addLayer(layer);
+                map.addLayer(layer);
                 layerMarker = L.marker(layer.getBounds().getCenter())
                 .bindTooltip("Municipio: <b><br>"+municipio.nom_municipio+".",{
                         permanent:true,
@@ -403,8 +407,10 @@ $(document).ready(function () {
         data = $.parseJSON(data.id);
         analisisRegion = $.parseJSON(data.region.analisis);
         // console.log($.parseJSON(data.region.analisis));
+       
         buscaRegion(data.region.nom_region);
         buscaMunicipio(data);
+        
         // getDataMunicipio(data);
        
 

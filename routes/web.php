@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AspirantesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -28,10 +29,12 @@ Route::get('/widgets/analisisregional', [WidgetsController::class, 'showAnalisis
 //Rutas de registro de proyectos
 Route::get('/registra_tu_proyecto', [RegistroProyectosController::class, 'index'])->name('registro.index');
 Route::post('/registra_tu_proyecto/buscarCURP', [RegistroProyectosController::class, 'buscarCURP'])->name('registro.buscarCURP');
+Route::post('/registra_tu_proyecto/buscarCURPSinFiltro', [RegistroProyectosController::class, 'buscarCURPSinFiltro'])->name('registro.buscarCURP');
 Route::post('/registra_tu_proyecto', [RegistroProyectosController::class, 'send'])->name('registro.send');
 Route::get('/registra_tu_proyecto/resultado', [RegistroProyectosController::class, 'resultadoRegistro'])->name('registro.resultado');
 Route::get('/registra_tu_proyecto/print', [RegistroProyectosController::class, 'imprimeRegistro'])->name('registro.print');
-
+//Rutas de registro de aspirantes
+Route::get('/registro_aspirante', [AspirantesController::class, 'registro'])->name('aspirantes.registro');
 
 Auth::routes();
 

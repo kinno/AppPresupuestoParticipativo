@@ -1,5 +1,10 @@
 /* Estilos Propios */
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Medium.ttf');
+}
+
 header.navbar{
     font-size: 16px;
     color: #485700;
@@ -57,4 +62,14 @@ header.navbar{
 
   .bold{
     font-weight: bold;
+    font-family: "Roboto";
+  }
+
+  .fondo{
+    background: url(../images/logos/imagen_folio.jpg) fixed center no-repeat;
+    background-size: cover;
+  }
+
+  span{
+    font-family: 'Roboto' !important;
   }

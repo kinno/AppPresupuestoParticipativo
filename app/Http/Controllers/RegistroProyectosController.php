@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistroFormRequest;
 use App\Http\Traits\CatalogosTrait;
+use App\Http\Traits\WebserviceTrait;
 use App\Models\TblPostulantes;
 use App\Models\TblProyectosPP;
+use App\Rules\ValidaCurpRule;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -15,7 +17,7 @@ class RegistroProyectosController extends Controller
 {
     //
 
-    use CatalogosTrait;
+    use CatalogosTrait, WebserviceTrait;
 
     public function index(){
         $municipios = $this->getMunicipios();
@@ -31,23 +33,56 @@ class RegistroProyectosController extends Controller
     }
 
     public function buscarCURP(Request $request){
+        $responseValidaCurp = $this->validaCurp($request->curp);
         
-        $postulante = TblPostulantes::where('curp',$request->curp)->first();
-        if(is_null($postulante)){
-            $data = [
-                'success'=>true,
-                'encontrado'=>false,
-            ];
-           return response()->json($data, 200);
+        if($responseValidaCurp->mensaje == "EXITO"){
+            $nombre = $responseValidaCurp->response[0]->nombre." ".$responseValidaCurp->response[0]->apellidoPaterno." ".$responseValidaCurp->response[0]->apellidoMaterno;
+            $postulante = TblPostulantes::where('curp',$request->curp)->first();
+            if(is_null($postulante)){
+                $data = [
+                    'success'=>true,
+                    'encontrado'=>false,
+                    'nombre' => $nombre,
+                ];
+            return response()->json($data, 200);
+            }else{
+                $data = [
+                    'success'=>true,
+                    'encontrado'=>true,
+                    'id_proyecto_pp'=>$postulante->proyectoPP->id
+                ];
+            return response()->json($data, 200);
+            }
         }else{
             $data = [
-                'success'=>true,
-                'encontrado'=>true,
-                'id_proyecto_pp'=>$postulante->proyectoPP->id
+                'success'=>false,
+                'encontrado'=>false,
+                'response'=>$responseValidaCurp->response[0]->descripcion,
             ];
-           return response()->json($data, 200);
+            return response()->json($data, 200);
         }
+        
        
+    }
+
+    public function buscarCURPSinFiltro(Request $request){
+            $postulante = TblPostulantes::where('curp',$request->curp)->first();
+            $nombre = "";
+            if(is_null($postulante)){
+                $data = [
+                    'success'=>true,
+                    'encontrado'=>false,
+                    'nombre' => $nombre,
+                ];
+            return response()->json($data, 200);
+            }else{
+                $data = [
+                    'success'=>true,
+                    'encontrado'=>true,
+                    'id_proyecto_pp'=>$postulante->proyectoPP->id
+                ];
+            return response()->json($data, 200);
+            }
     }
 
     public function send(RegistroFormRequest $request){
