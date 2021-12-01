@@ -5,7 +5,7 @@
     <form action="{{ route('registro.send') }}" method="post" id="formRegistro" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <div class="col">
+            <div class="col-12">
                 <h4 class="text-center ">
                     Solicitud de registro para aspirantes de Comités Ciudadanos Regionales de Presupuesto Participativo
                 </h4>

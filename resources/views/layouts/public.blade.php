@@ -83,7 +83,11 @@
                                           <div class="dropdown-divider"></div>
                                           <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
-                                      </li>
+                                    </li>
+                                    <li class="nav-item {{ (Route::currentRouteName() == 'votaciones.index') ? 'active' : '' }}">
+                                        <a class="nav-link" href="{{ route('votaciones.index') }}">Votaciones
+                                            <span class="sr-only">(current)</span></a>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>

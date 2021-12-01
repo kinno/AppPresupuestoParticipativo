@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CatMunicipioController;
 use App\Http\Controllers\RegistroProyectosController;
+use App\Http\Controllers\VotacionesController;
 use App\Http\Controllers\WidgetsController;
 
 /*
@@ -35,6 +36,11 @@ Route::get('/registra_tu_proyecto/resultado', [RegistroProyectosController::clas
 Route::get('/registra_tu_proyecto/print', [RegistroProyectosController::class, 'imprimeRegistro'])->name('registro.print');
 //Rutas de registro de aspirantes
 Route::get('/registro_aspirante', [AspirantesController::class, 'registro'])->name('aspirantes.registro');
+//Rutas de votaciones
+Route::get('/votaciones', [VotacionesController::class, 'index'])->name('votaciones.index');
+Route::post('/votaciones/valida_curp', [VotacionesController::class, 'validaCurpYMunicipio'])->name('votaciones.buscarCURP');
+Route::post('/votaciones/valida_curpSinFiltro', [VotacionesController::class, 'validaCurpYMunicipioSinFiltro'])->name('votaciones.buscarCURP');
+Route::get('/votaciones/get_boleta', [VotacionesController::class, 'getBoleta'])->name('votaciones.getBoleta');
 
 Auth::routes();
 

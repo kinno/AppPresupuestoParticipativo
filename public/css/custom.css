@@ -73,3 +73,42 @@ header.navbar{
   span{
     font-family: 'Roboto' !important;
   }
+
+  .candidatos {
+    /* display: block; */
+    /* top: 0px; */
+    /* position: relative; */
+   
+    /* background-color: #f2f8f9; */
+    border-radius: 4px;
+    /* padding: 32px 24px; */
+    /* margin: 12px;
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+    border: 1px solid #f2f8f9; */
+  }
+  
+    .candidatos:hover {
+      transition: all 0.2s ease-out;
+      box-shadow: 0px 4px 8px rgba(35, 163, 41, 0.8);
+      top: -4px;
+      border: 1px solid #cccccc;
+      background-color: rgba(56,193,114, 0.2);
+    }
+  
+    .candidatos:before {
+     
+    }
+  
+    .candidatos:hover:before {
+      transform: scale(2.15);
+    }
+  
+    .active-candidatos{
+      transition: all 0.2s ease-out;
+      box-shadow: 0px 4px 8px rgba(35, 163, 41, 0.8);
+      top: -4px;
+      border: 1px solid #cccccc;
+      background-color: rgba(56,193,114, 0.2);
+    }
