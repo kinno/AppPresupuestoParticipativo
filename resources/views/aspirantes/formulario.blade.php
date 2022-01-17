@@ -6,9 +6,9 @@
         @csrf
         <div class="row">
             <div class="col-12">
-                <h4 class="text-center ">
+                <h2 class="text-center ">
                     Solicitud de registro para aspirantes de Comités Ciudadanos Regionales de Presupuesto Participativo
-                </h4>
+                </h2>
             </div>
         </div>
         <div class="card mt-3">

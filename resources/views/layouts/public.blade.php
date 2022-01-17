@@ -97,7 +97,7 @@
         </topmenu>
 
         <!-- Main content -->
-        <main role="main">
+        <main role="main" class="pb-5">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 offset-xl-1">
@@ -106,6 +106,60 @@
                 </div>
             </div>
         </main>
+
+        {{-- Footer --}}
+        <footer class="mt-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9" style="background-color: #c9c9c9;">
+                        <div class="row mt-2">
+                            <div class="col">
+                                <h5 class="text-center">Conoce el estado</h5>
+                                <ul>
+                                    <li><a href="https://edomex.gob.mx/" target="_blank">Portal del Gobierno del Estado de México</a></li>
+                                    <li><a href="http://edomex.gob.mx/nuestros_municipios" target="_blank">Nuestros municipios</a></li>
+                                    <li><a href="https://edomex.gob.mx/corredores_turisticos" target="_blank">Corredores turísticos</a></li>
+                                    <li><a href="http://edomex.gob.mx/parques" target="_blank">Parques</a></li>
+                                    <li><a href="https://edomex.gob.mx/pueblos_magicos_encanto" target="_blank">Pueblos Mágicos</a></li>
+                                    <li><a href="https://turismo.edomex.gob.mx/" target="_blank">Visita el Estado</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h5 class="text-center">Acerca del sitio</h5>
+                            </div>
+                            <div class="col">
+                                <h5 class="text-center">Contacto</h5>
+                                <ul>
+                                    <li class="text-center" style="list-style:none;">Gobierno del Estado de México Secretaría de Finanzas</li>
+                                    <li style="list-style:none;">Subsecretaría de Planeación y Presupuesto</li>
+                                    <li style="list-style:none;">Colorín #101 Col. Lomas Altas, Toluca</li>
+                                    <li style="list-style:none;">presupuesto.participativo@edomex.gob.mx</li>
+                                    <li><a href="https://presupuestoparticipativo.edomex.gob.mx/contactanos" target="_blank">Contáctanos</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h5 class="text-center">Enlaces de Interés</h5>
+                                <ul>
+                                    <li><a href="https://finanzas.edomex.gob.mx/inicio" target="_blank">Secretaría de Finanzas del Estado de México</a></li>
+                                    <li><a href="https://igecem.edomex.gob.mx" target="_blank">IGECEM</a></li>
+                                    <li><a href="http://transparenciafiscal.edomex.gob.mx/" target="_blank">Transparencia fiscal</a></li>
+                                    <li><a href="http://www.infoem.org.mx/" target="_blank">INFOEM</a></li>
+                                    <li><a href="https://www.ipomex.org.mx/ipo3/lgt/indice/sgg.web" target="_blank">Información pública</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" style="background-color: #EDEDED;">
+                        <img src="{{ asset('images/logos/h1.png') }}" alt="" class="logo-header mt-2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 pt-3 text-center text-light" style="background-color: #494E54">
+                        <p>Algunos derecho reservados 2018. Gobierno del Estado de México</p>
+                        <p>Esta página está diseñada para verse mejor en reolución 1280 X 768 o superior, Navegadores recomendados: Firefox & Chrome V68, Safari V14, Edge.</p>                    </div>
+                </div>
+            </div>
+        </footer>
 
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

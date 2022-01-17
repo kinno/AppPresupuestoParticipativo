@@ -41,6 +41,7 @@ Route::get('/votaciones', [VotacionesController::class, 'index'])->name('votacio
 Route::post('/votaciones/valida_curp', [VotacionesController::class, 'validaCurpYMunicipio'])->name('votaciones.buscarCURP');
 Route::post('/votaciones/valida_curpSinFiltro', [VotacionesController::class, 'validaCurpYMunicipioSinFiltro'])->name('votaciones.buscarCURP');
 Route::get('/votaciones/get_boleta', [VotacionesController::class, 'getBoleta'])->name('votaciones.getBoleta');
+Route::post('/votaciones', [VotacionesController::class, 'send'])->name('votaciones.send');
 
 Auth::routes();
 

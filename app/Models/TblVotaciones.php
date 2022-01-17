@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TblVotaciones extends Model
 {
     use HasFactory;
+    protected $table = "tbl_votaciones";
+
+    public function proyecto(){
+        return $this->hasOne('App\Models\TblProyectosPP','id','id_proyecto_pp');
+     }
 }

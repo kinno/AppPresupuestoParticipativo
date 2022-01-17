@@ -6,10 +6,10 @@
             {{-- <form action="{{ route('votaciones.sendData') }}" method="post" id="formRegistro" enctype="multipart/form-data"> --}}
                 @csrf
                 <div class="row">
-                    <div class="col-12">
-                        <h4 class="text-center ">
+                    <div class="col-12 mb-3">
+                        <h1 class="text-center ">
                             Bienvenido a la votación para el Presupuesto Participativo
-                        </h4>
+                        </h1>
                     </div>
                 </div>
                 <div class="row">
@@ -26,9 +26,6 @@
                                                 <span class="bi bi-person-square"></span>
                                             @endslot
                                         </x-form-input>
-                                        <div id="alert" class="alert alert-danger" role="alert" style="display:none">
-                                            
-                                        </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                         <x-form-select name="id_municipio" id="id_municipio"
@@ -43,10 +40,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-xs-12 col-sm-12 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
-                                        <div id="alert" class="alert alert-danger" role="alert" style="display:none">
-                                            
-                                        </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2" id="alert">
                                     </div>
                                 </div>
                                 <div class="form-row">

@@ -2,7 +2,14 @@
 
 @section('content')
 <div class="container-fluid mt-4">
-    <div class="dynamic-container" style="display">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <h1 class=" text-center ">
+                Registro de proyectos para el Presupuesto Participativo
+            </h1>
+        </div>
+    </div>
+    <div class="dynamic-container " style="display">
         <div class="col-xs-12 col-sm-12 col-md-7 offset-md-2 col-lg-4 offset-lg-2 col-xl-7 offset-xl-2">
             <div class="card text-center mb-5">
                 <div class="card-header">

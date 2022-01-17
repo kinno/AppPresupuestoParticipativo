@@ -2,11 +2,11 @@
 
 @section('content') --}}
 <div class="container-fluid mt-4">
-    <form action="{{ route('registro.send') }}" method="post" id="formRegistro" enctype="multipart/form-data">
+    <form action="{{ route('votaciones.send') }}" method="post" id="formRegistro" enctype="multipart/form-data">
         @csrf
         {{-- {{ count($proyectos) }} --}}
         <div class="row">
-            <div class="col-12 mt-3">
+            <div class="col-12 mb-3">
                 <h1 class="text-center ">
                     Proyectos candidatos para la región: {{ $municipio->region->cve_region }} {{ $municipio->region->nom_region }}
                 </h1>
@@ -15,7 +15,7 @@
         @if (count($proyectos)>0)
             <div class="row">
                 <div class="col-12">
-                    <div class="card text-center mt-5">
+                    <div class="card text-center">
                         <div class="card-header">
                         <h2>Boleta Digital</h2>
                         </div>
@@ -58,7 +58,8 @@
             
             <div class="form-row mt-4 pb-5">
                 <div class="col-xs-12 col-sm-12 col-md-10 offset-md-1 col-lg-5 offset-lg-4 col-xl-6 offset-xl-3">
-                    <x-form-input name="proyecto" label="Proyecto seleccionado: " id="proyectoSeleccionado" hidden></x-form-input>
+                    <x-form-input name="proyecto" id="proyectoSeleccionado" hidden></x-form-input>
+                    <x-form-input name="curp" id="curp" value="{{ $curp }}" hidden></x-form-input>
                     <x-form-submit class="btn-lg btn-block btn-success">
                         <i class="bi-clipboard-check" ></i> Guardar registro
                     </x-form-submit>
@@ -89,19 +90,7 @@
     </form>
 </div>
 {{-- @endsection --}}
-{{-- @section('scripts')
+{{-- @section('scripts') --}}
 <script src="{{ asset('js/votaciones/votaciones.js') }}">
-    $("#btnback").click(function (e) { 
-        e.preventDefault();
-        alert();
-        
-    });
 </script>
-@endsection --}}
-<script>
-    $(function () {
-        $("#btnback").on('click', function () {
-            location.reload();
-        });
-    });
-</script>
+{{-- @endsection  --}}
