@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="form-row">
                         <div class="col-12">
-                            <x-form-input name="curp_verify" id="curpinput" label="CURP: ">
+                            <x-form-input name="curp_verify" id="curpinput" style="text-transform: uppercase" label="CURP: ">
                                 @slot('prepend')
                                     <span class="bi bi-person-square"></span>
                                 @endslot
@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col">
-                                            <x-form-input name="curp" label="CURP: "></x-form-input>
+                                            <x-form-input name="curp" label="CURP: " style="text-transform: uppercase"></x-form-input>
                                         </div>
                                         <div class="col">
                                             <x-form-input name="correo" label="Correo Electrónico: "></x-form-input>

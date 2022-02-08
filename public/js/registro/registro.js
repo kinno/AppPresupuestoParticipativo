@@ -27,7 +27,10 @@ $(function () {
                         $(".dynamic-container").each(function(index){
                                 $(this).fadeToggle("slow");
                             })
+                            console.log(response);
                         $("#auto_id_nombre").val(response.nombre);    
+                        $("#auto_id_edad").val(response.edad);    
+                        $("input[name=sexo][value="+response.sexo+"]").attr('checked',true);    
                         $("#auto_id_curp").val($("#curpinput").val());    
                     }
                 }else{

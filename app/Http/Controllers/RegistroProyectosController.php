@@ -12,6 +12,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class RegistroProyectosController extends Controller
 {
@@ -36,6 +37,10 @@ class RegistroProyectosController extends Controller
         $responseValidaCurp = $this->validaCurp($request->curp);
         
         if($responseValidaCurp->mensaje == "EXITO"){
+            // dd($responseValidaCurp);
+            $time = Carbon::createFromFormat('d/m/Y',$responseValidaCurp->response[0]->fechaNacimientoAxu);
+            $now = Carbon::now();
+            //dd($time->year, $now->year, ($now->year - $time->year));
             $nombre = $responseValidaCurp->response[0]->nombre." ".$responseValidaCurp->response[0]->apellidoPaterno." ".$responseValidaCurp->response[0]->apellidoMaterno;
             $postulante = TblPostulantes::where('curp',$request->curp)->first();
             if(is_null($postulante)){
@@ -43,6 +48,10 @@ class RegistroProyectosController extends Controller
                     'success'=>true,
                     'encontrado'=>false,
                     'nombre' => $nombre,
+                    'edad' => $now->year - $time->year,
+                    'cve_entidad_nacimiento' => $responseValidaCurp->response[0]->cveEntidadNacimiento,
+                    'nacionalidad' => $responseValidaCurp->response[0]->nacionalidad,
+                    'sexo' => $responseValidaCurp->response[0]->sexo,
                 ];
             return response()->json($data, 200);
             }else{
